@@ -54,10 +54,14 @@ Screenshots will be added when features are implemented.
 
 ## Agile Development
 
-User stories, acceptance criteria and development tasks will be
-tracked in a public GitHub Projects board.
+## Agile Development
 
-Board link: to be added.
+User stories, acceptance criteria and development tasks are tracked
+in a public GitHub Projects board using Todo, In Progress and Done.
+
+[View the project board](https://github.com/users/Jasmeen-13/projects/1)
+
+![Initial Agile board](docs/screenshots/agile-board-initial.png)
 
 Priorities and future features are recorded in [the backlog](docs/backlog.md).
 Development progress is recorded in [the project log](docs/project-log.md).
