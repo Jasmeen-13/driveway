@@ -35,3 +35,20 @@
 - Prepare wireframes and the database design.
 - Build the first working application features.
 - Deploy an early version to Heroku.
+
+### 6 November 2026 — Car model
+
+- Created the cars app and Car model, linked to Django's user model.
+- Added car details, an optional listing URL, photo and notes.
+- Installed Pillow for image uploads.
+- Applied database migrations successfully.
+- Ran Django's system check: no issues reported.
+- Frontend functionality is not yet implemented or tested.
+
+### 6 November 2026 — Homepage and authentication
+
+- Added car forms, views and URL routes.
+- Built the shared layout, homepage, account forms and shortlist page.
+- Manually verified registration, login, logout, redirects,
+  username display and success messages: all passed.
+- Car creation, editing and deletion still need templates and testing.

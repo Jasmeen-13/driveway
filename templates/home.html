@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Driveway | Picture your next car{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <p class="eyebrow">Your next car starts here</p>
+    <h1>Picture your next car.</h1>
+    <p class="hero-description mt-4">
+        Your shortlist. One place to decide.
+        Save the cars you love, keep their details together
+        and make room for your next choice.
+    </p>
+
+    <div class="d-flex flex-wrap gap-3 mt-4">
+        {% if user.is_authenticated %}
+        <a href="{% url 'cars:list' %}" class="btn btn-dark">
+            My driveway
+        </a>
+        <a href="{% url 'cars:create' %}" class="btn btn-outline-dark">
+            Add a car
+        </a>
+        {% else %}
+        <a href="{% url 'register' %}" class="btn btn-dark">
+            Get started
+        </a>
+        <a href="{% url 'login' %}" class="btn btn-outline-dark">
+            Log in
+        </a>
+        {% endif %}
+    </div>
+</section>
+
+<section class="row g-3 pb-5" aria-label="About Driveway">
+    <div class="col-md-4">
+        <div class="feature-card">
+            <h2>Your cars, together</h2>
+            <p>Keep your favourite finds in one personal shortlist.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <h2>The details that matter</h2>
+            <p>Keep prices, mileage, specifications and your own notes handy.</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="feature-card">
+            <h2>Make it yours</h2>
+            <p>Add a car photo and keep a link to the original listing.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

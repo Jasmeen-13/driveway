@@ -1,0 +1,125 @@
+:root {
+    --cream: #f7f5ef;
+    --green: #244b3c;
+    --green-dark: #18372b;
+    --ink: #202823;
+    --muted: #59645c;
+    --border: #d8ddd5;
+}
+
+body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+.navbar {
+    background: var(--cream);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    color: var(--green);
+    font-size: 1.6rem;
+    letter-spacing: -0.06em;
+}
+
+.nav-link,
+.navbar-text {
+    color: var(--ink);
+}
+
+.btn {
+    border-radius: 0.65rem;
+    padding: 0.65rem 1.1rem;
+}
+
+.btn-dark {
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.btn-dark:hover,
+.btn-dark:focus-visible {
+    background: var(--green-dark);
+    border-color: var(--green-dark);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #986117;
+    outline-offset: 3px;
+}
+
+.hero {
+    padding: clamp(2rem, 7vw, 6rem) 0;
+}
+
+.hero h1 {
+    max-width: 700px;
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.055em;
+    line-height: 1.08;
+}
+
+.hero-description {
+    max-width: 550px;
+    color: var(--muted);
+    font-size: 1.15rem;
+}
+
+.eyebrow {
+    color: var(--green);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.feature-card {
+    height: 100%;
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+}
+
+.feature-card h2 {
+    font-size: 1.25rem;
+}
+
+.feature-card p {
+    margin-bottom: 0;
+    color: var(--muted);
+}
+
+footer {
+    color: var(--muted);
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+form input:not([type="hidden"]):not([type="checkbox"]),
+form select,
+form textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #78867c;
+    border-radius: 0.5rem;
+    background: #fff;
+    color: var(--ink);
+}
+
+.errorlist {
+    margin: 0.5rem 0;
+    padding-left: 1.25rem;
+}
