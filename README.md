@@ -12,6 +12,13 @@ In development. Features listed as planned are not yet implemented.
 
 ## User Experience Design
 
+### Wireframes
+
+Wireframes were created in Lucidchart to plan the desktop and mobile
+layouts, account forms, car management and comparison screens.
+
+[View the wireframes](docs/design/driveway-wireframes.png)
+
 ### Target Audience
 
 People comparing cars advertised across different websites.
@@ -96,8 +103,9 @@ as they are used.
 ChatGPT has assisted with project planning, scope decisions,
 environment setup and explanations of configuration code.
 
-Further assistance with development, debugging and improvements
-will be recorded as it occurs.
+I used Lucidchart AI to create the initial wireframe layouts, then reviewed and adjusted the designs before implementation.
+
+Further assistance with development, debugging and improvements will be recorded as it occurs.
 
 GitHub Copilot-assisted Django unit tests are planned to meet the
 assessment requirements. Their generation, review and results
