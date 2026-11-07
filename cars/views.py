@@ -71,4 +71,29 @@ def car_delete(request, pk):
         "cars/car_confirm_delete.html",
         {"car": car},
     )
-   
+
+@login_required
+def car_compare(request):
+    selected_ids = request.GET.getlist("car")
+
+    try:
+        car_ids = list(dict.fromkeys(int(pk) for pk in selected_ids))
+    except (TypeError, ValueError):
+        messages.error(request, "Choose valid cars from your shortlist.")
+        return redirect("cars:list")
+
+    if not 2 <= len(car_ids) <= 3:
+        messages.error(request, "Select two or three cars to compare.")
+        return redirect("cars:list")
+
+    cars = list(
+        Car.objects.filter(owner=request.user, pk__in=car_ids)
+    )
+
+    if len(cars) != len(car_ids):
+        messages.error(
+            request, "One or more selected cars are unavailable."
+        )
+        return redirect("cars:list")
+
+    return render(request, "cars/car_compare.html", {"cars": cars})

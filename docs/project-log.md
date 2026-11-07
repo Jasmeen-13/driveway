@@ -52,3 +52,10 @@
 - Manually verified registration, login, logout, redirects,
   username display and success messages: all passed.
 - Car creation, editing and deletion still need templates and testing.
+
+### Comparison feature started
+
+- Added the comparison view and URL route.
+- Fixed the view definition so the development server starts successfully.
+- Comparison template and selection controls are still pending.
+- Comparison functionality has not yet been tested.
