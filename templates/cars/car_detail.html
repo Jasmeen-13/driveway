@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}{{ car.make }} {{ car.model }} | Driveway{% endblock %}
+
+{% block content %}
+<a href="{% url 'cars:list' %}" class="btn btn-outline-dark mb-4">
+    Back to shortlist
+</a>
+
+<article class="feature-card">
+    <div class="row g-4">
+        <div class="col-md-7">
+            {% if car.photo %}
+            <img src="{{ car.photo.url }}"
+                 alt="{{ car.make }} {{ car.model }}"
+                 class="img-fluid rounded">
+            {% else %}
+            <p>No photo added yet.</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-5">
+            <h1 class="h2">{{ car.make }} {{ car.model }}</h1>
+            <p class="fs-4 fw-bold">£{{ car.price|floatformat:2 }}</p>
+
+            <dl class="row">
+                <dt class="col-5">Year</dt>
+                <dd class="col-7">{{ car.year }}</dd>
+
+                <dt class="col-5">Mileage</dt>
+                <dd class="col-7">{{ car.mileage }} miles</dd>
+
+                <dt class="col-5">Fuel</dt>
+                <dd class="col-7">{{ car.get_fuel_type_display }}</dd>
+
+                <dt class="col-5">Transmission</dt>
+                <dd class="col-7">{{ car.get_transmission_display }}</dd>
+            </dl>
+
+            {% if car.notes %}
+            <h2 class="h5">Your notes</h2>
+            <div class="mb-4">{{ car.notes|linebreaks }}</div>
+            {% endif %}
+
+            <div class="d-flex flex-wrap gap-2">
+                {% if car.listing_url %}
+                <a href="{{ car.listing_url }}"
+                   class="btn btn-dark"
+                   target="_blank" rel="noopener noreferrer">
+                    View listing (new tab)
+                </a>
+                {% endif %}
+
+                <a href="{% url 'cars:update' car.pk %}"
+                   class="btn btn-outline-dark">
+                    Edit
+                </a>
+                <a href="{% url 'cars:delete' car.pk %}"
+                   class="btn btn-outline-danger">
+                    Delete
+                </a>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Delete car | Driveway{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-8 col-lg-6">
+        <div class="feature-card">
+            <h1 class="h2">Delete this car?</h1>
+            <p>
+                Remove <strong>{{ car.make }} {{ car.model }}</strong>
+                from your shortlist? This cannot be undone.
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="{% url 'cars:detail' car.pk %}"
+                       class="btn btn-outline-dark">
+                        Cancel
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        Delete car
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

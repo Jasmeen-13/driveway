@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }} | Driveway{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-9 col-lg-7">
+        <div class="feature-card">
+            <h1 class="h2 mb-3">{{ page_title }}</h1>
+            <p>Save the details of a car you're considering.</p>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                {% for field in form %}
+                <div class="mb-3">
+                    {{ field.label_tag }}
+                    {{ field }}
+
+                    {% if field.help_text %}
+                    <div class="form-text"
+                         id="{{ field.auto_id }}_helptext">
+                        {{ field.help_text|safe }}
+                    </div>
+                    {% endif %}
+
+                    {% if field.errors %}
+                    <div class="text-danger"
+                         id="{{ field.auto_id }}_error">
+                        {{ field.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <p class="text-secondary small">
+                    Photos: JPG, PNG or WebP, smaller than 5 MB.
+                    Listing URL, photo and notes are optional.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <button type="submit" class="btn btn-dark">
+                        Save car
+                    </button>
+                    <a href="{% url 'cars:list' %}"
+                       class="btn btn-outline-dark">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

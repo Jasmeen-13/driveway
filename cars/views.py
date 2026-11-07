@@ -71,3 +71,4 @@ def car_delete(request, pk):
         "cars/car_confirm_delete.html",
         {"car": car},
     )
+   
