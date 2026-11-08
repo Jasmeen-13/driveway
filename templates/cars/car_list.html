@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}My driveway | Driveway{% endblock %}
 
@@ -14,9 +15,14 @@
 </div>
 
 {% if cars %}
-<form method="get" action="{% url 'cars:compare' %}">
+<form method="get" action="{% url 'cars:compare' %}" data-compare-form>
     <fieldset>
         <legend class="h5">Select two or three cars to compare</legend>
+
+        <p class="form-text" data-compare-status aria-live="polite" role="status"
+           tabindex="-1">
+            0 of 3 cars selected.
+        </p>
 
         <button type="submit" class="btn btn-dark mb-4">
             Compare selected cars
@@ -76,4 +82,8 @@
     </a>
 </div>
 {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/compare.js' %}" defer></script>
 {% endblock %}

@@ -57,3 +57,10 @@ Registration/login, image uploads and CSRF protection are notcovered by this aut
 The deployed homepage passed the Nu HTML Checker with no errors or warnings.
 
 ![Homepage HTML validation](screenshots/html-validation-home.png)
+
+## JavaScript validation
+
+compare.js passed JSHint with no warnings.
+The selection counter, three-car limit, minimum selection message and keyboard controls were tested locally and passed.
+
+![JavaScript validation](screenshots/javascript-validation.png)
