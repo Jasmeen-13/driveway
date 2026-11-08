@@ -13,42 +13,67 @@
     </a>
 </div>
 
-<div class="row g-4">
-    {% for car in cars %}
-    <div class="col-md-6 col-lg-4">
-        <article class="feature-card">
-            {% if car.photo %}
-            <img src="{{ car.photo.url }}"
-                 alt="{{ car.make }} {{ car.model }}"
-                 class="img-fluid rounded mb-3"
-                 loading="lazy">
-            {% else %}
-            <p class="text-secondary">No photo added yet.</p>
-            {% endif %}
+{% if cars %}
+<form method="get" action="{% url 'cars:compare' %}">
+    <fieldset>
+        <legend class="h5">Select two or three cars to compare</legend>
 
-            <h2>{{ car.make }} {{ car.model }}</h2>
-            <p class="fw-bold">£{{ car.price|floatformat:2 }}</p>
-            <p>
-                {{ car.year }} · {{ car.mileage }} miles<br>
-                {{ car.get_fuel_type_display }} ·
-                {{ car.get_transmission_display }}
-            </p>
-            <a href="{% url 'cars:detail' car.pk %}"
-               class="btn btn-outline-dark mt-3">
-                View details
-            </a>
-        </article>
-    </div>
-    {% empty %}
-    <div class="col-12">
-        <div class="feature-card text-center py-5">
-            <h2>Your driveway is waiting</h2>
-            <p>Add your first car to start your shortlist.</p>
-            <a href="{% url 'cars:create' %}" class="btn btn-dark mt-3">
-                Add your first car
-            </a>
+        <button type="submit" class="btn btn-dark mb-4">
+            Compare selected cars
+        </button>
+
+        <div class="row g-4">
+            {% for car in cars %}
+            <div class="col-md-6 col-lg-4">
+                <article class="feature-card">
+                    {% if car.photo %}
+                    <img src="{{ car.photo.url }}"
+                         alt="{{ car.make }} {{ car.model }}"
+                         class="comparison-photo mb-3"
+                         loading="lazy">
+                    {% else %}
+                    <div class="comparison-photo mb-3 d-flex align-items-center justify-content-center">
+                        <span>No photo added yet</span>
+                    </div>
+                    {% endif %}
+
+                    <h2>{{ car.make }} {{ car.model }}</h2>
+                    <p class="fw-bold">£{{ car.price|floatformat:2 }}</p>
+                    <p>
+                        {{ car.year }} · {{ car.mileage }} miles<br>
+                        {{ car.get_fuel_type_display }} ·
+                        {{ car.get_transmission_display }}
+                    </p>
+
+                    <div class="form-check mt-3">
+                        <input class="form-check-input"
+                               type="checkbox"
+                               name="car"
+                               value="{{ car.pk }}"
+                               id="compare-car-{{ car.pk }}">
+                        <label class="form-check-label"
+                               for="compare-car-{{ car.pk }}">
+                            Compare {{ car.make }} {{ car.model }}
+                        </label>
+                    </div>
+
+                    <a href="{% url 'cars:detail' car.pk %}"
+                       class="btn btn-outline-dark mt-3">
+                        View details
+                    </a>
+                </article>
+            </div>
+            {% endfor %}
         </div>
-    </div>
-    {% endfor %}
+    </fieldset>
+</form>
+{% else %}
+<div class="feature-card text-center py-5">
+    <h2>Your driveway is waiting</h2>
+    <p>Add your first car to start your shortlist.</p>
+    <a href="{% url 'cars:create' %}" class="btn btn-dark mt-3">
+        Add your first car
+    </a>
 </div>
+{% endif %}
 {% endblock %}

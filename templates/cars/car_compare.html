@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Compare cars | Driveway{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+        <h1>Compare cars</h1>
+        <p>Your favourites, side by side.</p>
+    </div>
+    <a href="{% url 'cars:list' %}" class="btn btn-outline-dark">
+        Change selection
+    </a>
+</div>
+
+<div class="row g-4">
+    {% for car in cars %}
+    <div class="col-md-6 {% if cars|length == 3 %}col-lg-4{% endif %}">
+        <article class="feature-card">
+            {% if car.photo %}
+            <img src="{{ car.photo.url }}"
+                 alt="{{ car.make }} {{ car.model }}"
+                 class="comparison-photo mb-3">
+            {% else %}
+            <div class="comparison-photo mb-3 d-flex align-items-center justify-content-center">
+                <span>No photo added</span>
+            </div>
+            {% endif %}
+
+            <h2>{{ car.make }} {{ car.model }}</h2>
+            <p class="fs-4 fw-bold">£{{ car.price|floatformat:2 }}</p>
+
+            <dl>
+                <dt>Year</dt>
+                <dd>{{ car.year }}</dd>
+
+                <dt>Mileage</dt>
+                <dd>{{ car.mileage }} miles</dd>
+
+                <dt>Fuel</dt>
+                <dd>{{ car.get_fuel_type_display }}</dd>
+
+                <dt>Transmission</dt>
+                <dd>{{ car.get_transmission_display }}</dd>
+            </dl>
+
+            <a href="{% url 'cars:detail' car.pk %}"
+               class="btn btn-outline-dark">
+                View details
+            </a>
+        </article>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

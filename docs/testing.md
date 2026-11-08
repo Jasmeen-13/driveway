@@ -16,6 +16,8 @@ Tests performed locally using Django's development server.
 | Logged-out access to car details | Redirect to login | Pass |
 | Second account shortlist | First account's cars are absent | Pass |
 | Another user's detail, edit and delete URLs | Return 404 | Pass |
+| Compare two owned cars | Selected cars appear side by side | Pass |
+| Compare only one car | Show “Select two or three cars to compare.” | Pass |
 
 ### Follow-up
 

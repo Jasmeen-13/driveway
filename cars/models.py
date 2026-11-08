@@ -12,6 +12,7 @@ class Car(models.Model):
         PETROL = "petrol", "Petrol"
         DIESEL = "diesel", "Diesel"
         HYBRID = "hybrid", "Hybrid"
+        PETROL_PHEV = "petrol_phev", "Petrol plug-in hybrid"
         ELECTRIC = "electric", "Electric"
         OTHER = "other", "Other"
 
