@@ -72,6 +72,7 @@ def car_delete(request, pk):
         {"car": car},
     )
 
+
 @login_required
 def car_compare(request):
     selected_ids = request.GET.getlist("car")

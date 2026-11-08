@@ -34,6 +34,7 @@ Tests performed locally using Django's development server.
 | Live account isolation | Other users' cars are absent from shortlist | Pass |
 | Live other user's edit page | Returns 404 | Pass |
 | Live other user's delete page | Returns 404 | Pass |
+| Mobile layout | Pages remain readable, controls usable and comparison cards stack without horizontal overflow | Pass |
 
 
 ### Follow-up
@@ -50,3 +51,9 @@ All 14 Django tests passed using an isolated in-memory SQLite database and local
 
 Coverage includes car CRUD, ownership restrictions, logged-out redirects, comparison selections and form validation.
 Registration/login, image uploads and CSRF protection are notcovered by this automated suite.
+
+## HTML validation
+
+The deployed homepage passed the Nu HTML Checker with no errors or warnings.
+
+![Homepage HTML validation](screenshots/html-validation-home.png)
