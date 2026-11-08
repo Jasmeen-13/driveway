@@ -18,12 +18,35 @@ Tests performed locally using Django's development server.
 | Another user's detail, edit and delete URLs | Return 404 | Pass |
 | Compare two owned cars | Selected cars appear side by side | Pass |
 | Compare only one car | Show “Select two or three cars to compare.” | Pass |
+| Live homepage | Page and styling load | Pass |
+| Live registration | Account created and shortlist opens | Pass |
+| Live car creation with photo | Car details and photo display | Pass |
+| Persistence after Heroku restart | Saved car and photo remain available | Pass |
+| Live edit | Updated price is saved and displayed | Pass |
+| Live cancel deletion | Car remains saved | Pass |
+| Live confirm deletion | Car card disappears from shortlist | Pass |
+| Live compare two cars | Both cars and correct details appear | Pass |
+| Live compare three cars | All three cars appear | Pass |
+| Live compare one car | Selection validation message appears | Pass |
+| Live compare no cars | Selection validation message appears | Pass |
+| Live logged-out car access | Redirects to login | Pass |
+| Live other user's car details | Returns 404 | Pass |
+| Live account isolation | Other users' cars are absent from shortlist | Pass |
+| Live other user's edit page | Returns 404 | Pass |
+| Live other user's delete page | Returns 404 | Pass |
+
 
 ### Follow-up
 
-A car card initially appeared to remain after deletion. It later
-disappeared, but the cause was not established. Repeat this test
-during final regression testing.
+A car card initially appeared to remain after deletion. It later disappeared, but the cause was not established. Repeat this test during final regression testing.
 
-Direct unauthorised POST requests, automated tests and deployed-site
-testing are still pending.
+Direct unauthorised POST requests, automated tests and deployed-site testing are still pending.
+
+## Automated tests
+
+Created with GitHub Copilot assistance.
+
+All 14 Django tests passed using an isolated in-memory SQLite database and local file storage. No system-check issues were reported.
+
+Coverage includes car CRUD, ownership restrictions, logged-out redirects, comparison selections and form validation.
+Registration/login, image uploads and CSRF protection are notcovered by this automated suite.
