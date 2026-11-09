@@ -11,7 +11,7 @@ AI Augmented FullStack Bootcamp.
 
 **[View the repository](https://github.com/Jasmeen-13/driveway)**
 
-## User Experience
+## User Experience Design
 
 ### Purpose and Audience
 
@@ -74,6 +74,18 @@ to prioritise a working, tested car-management experience.
 | Selection feedback | JavaScript updates the selection count, prevents a fourth selection and explains invalid submissions. |
 | Validation | Django validates submitted data and comparison selections independently of JavaScript. |
 | Deletion confirmation | Review the selected car before confirming deletion. |
+
+### Compare Saved Cars
+
+Compare two or three saved cars side by side.
+
+![Car comparison](docs/screenshots/car-comparison.png)
+
+### Edit Saved Cars
+
+Update saved car details and receive confirmation after saving.
+
+![Successful car edit](docs/screenshots/car-edit-success.png)
 
 ## Data Model and Permissions
 
@@ -156,7 +168,11 @@ homepage:
 
 These scores cover the homepage and complement the manual tests.
 
-**[Full testing results, issues and evidence](docs/testing.md)**
+![Mobile Lighthouse results](docs/screenshots/lighthouse-mobile.png)
+
+![Desktop Lighthouse results](docs/screenshots/lighthouse-desktop.png)
+
+[Full testing results, issues and evidence](docs/testing.md)
 
 ## Local Installation
 
@@ -237,10 +253,19 @@ web: gunicorn config.wsgi:application --log-file -
 The release process applies database migrations. WhiteNoise serves
 static files, while Cloudinary stores uploaded photographs.
 
-## Credits and AI Use
+## Credits
 
 Django and Bootstrap provide the framework and interface components.
 Cloudinary provides photograph storage.
+
+### Car Photographs
+
+Car photographs used in demonstration records and project screenshots
+were sourced from listings on [CarGurus](https://www.cargurus.co.uk/).
+Images belong to their respective owners. Driveway does not
+automatically import images from CarGurus.
+
+## Usage of AI
 
 - **Lucidchart AI:** Used to design the initial wireframe layouts.
   I reviewed and adjusted the designs before implementation.
@@ -310,10 +335,3 @@ the deployed PostgreSQL and Cloudinary integrations were tested manually.
 ### Known Limitations
 
 Deleting a car removes its database record, but its uploaded photo may remain in storage. Automatic orphaned-file cleanup is planned.
-
-### Car photographs
-
-Car photographs used in demonstration records and project screenshots
-were sourced from listings on [CarGurus](https://www.cargurus.co.uk/).
-Images belong to their respective owners. Driveway does not
-automatically import images from CarGurus.
