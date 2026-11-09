@@ -29,14 +29,22 @@ form validation.
 | Test | Expected result | Result |
 | --- | --- | --- |
 | Homepage | Page and styling load correctly | Pass |
-| Registration | Account created and shortlist opens | Pass |
+| Fresh registration | Account created and shortlist opens | Pass |
+| Log out | User logged out successfully | Pass |
+| Log in | User logged in successfully | Pass |
+| Duplicate username, mismatched passwords or empty required registration fields | Registration is rejected | Pass |
+| Invalid login credentials | A generic error is shown | Pass |
+| HTTP redirect | HTTP request returns 301 with Location pointing to HTTPS URL | Pass |
 | Create car with photo | Car details and photograph display | Pass |
 | Persistence after Heroku restart | Saved car and photograph remain available | Pass |
-| Edit car | Updated price is saved and displayed | Pass |
+| Edit price | Updated price is saved and displayed | Pass |
+| Negative car price or invalid listing URL | Input is rejected and other entered details are preserved | Pass |
+| Non-image upload or image over 5 MB | Upload is rejected | Pass |
 | Cancel deletion | Car remains saved | Pass |
 | Confirm deletion | Car card disappears from shortlist | Pass |
 | Compare two cars | Both cars and correct details appear | Pass |
 | Compare three cars | All three cars appear | Pass |
+| Select a fourth car | Fourth selection is prevented | Pass |
 | Compare one car | Selection validation message appears | Pass |
 | Compare no cars | Selection validation message appears | Pass |
 | Logged-out car access | Redirect to login | Pass |
@@ -44,6 +52,9 @@ form validation.
 | Another user's detail URL | Return 404 | Pass |
 | Another user's edit URL | Return 404 | Pass |
 | Another user's delete URL | Return 404 | Pass |
+
+Chrome cookie inspection confirmed that both `sessionid` and `csrftoken`
+had the Secure flag checked.
 
 ### JavaScript and Keyboard Interaction
 
@@ -65,6 +76,7 @@ form validation.
 | Mobile comparison | Car cards stack without horizontal overflow | Pass |
 | Chrome | Tested account, car-management and comparison journeys work | Pass |
 | Safari | Login, add, edit, delete, comparison, selection feedback and logout work | Pass |
+| Account forms on mobile and with keyboard navigation | Forms remain usable | Pass |
 
 ## Automated Testing
 
@@ -122,7 +134,7 @@ template code.
 | Homepage | No errors or warnings | [Homepage validation](screenshots/html-validation-home.png) |
 | Registration | Passed | [Registration validation](screenshots/html-validation-register.png) |
 | Login | Passed | [Login validation](screenshots/html-validation-login.png) |
-| Shortlist | Passed before the JavaScript template changes; recheck pending | [Shortlist validation](screenshots/html-validation-shortlist.png) |
+| Shortlist | No errors or warnings | [Shortlist validation](screenshots/html-validation-shortlist.png) |
 | Add car | Passed | [Add-car validation](screenshots/html-validation-add-car.png) |
 | Edit car | Passed | [Edit-car validation](screenshots/html-validation-edit-car.png) |
 | Car details | Passed | [Car-details validation](screenshots/html-validation-car-detail.png) |
@@ -194,9 +206,6 @@ interaction is fully accessible.
 | Python formatting warnings | Corrected whitespace, final newlines and line wrapping; validation then passed. |
 | JSHint conditional-expression warning | Replaced the expression with an equivalent `if/else`; validation then passed. |
 
-### Final Checks Outstanding
+### Evidence Review
 
-- Repeat HTML validation for the updated shortlist following the
-  addition of the selection status and script.
-- Confirm that all screenshot links in this document open the
-  correct evidence.
+All linked screenshots were visually checked and are readable.

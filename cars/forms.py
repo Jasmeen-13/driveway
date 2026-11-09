@@ -48,7 +48,7 @@ class CarForm(forms.ModelForm):
         if photo and hasattr(photo, "content_type"):
             if photo.size > 5 * 1024 * 1024:
                 raise forms.ValidationError(
-                    "Choose an image smaller than 5 MB."
+                    "Choose an image 5 MiB or less."
                 )
             if photo.content_type not in (
                 "image/jpeg", "image/png", "image/webp"

@@ -78,6 +78,7 @@ and comparison.
 Photo sliders, driveway visualisation and registration-number lookup
 also remain future features. The README and backlog distinguish
 these plans from implemented functionality.
+Automatic listing imports and upload previews are also future work.
 
 ## JavaScript Enhancement
 
@@ -121,21 +122,36 @@ these plans from implemented functionality.
 - Added the wireframe image and full-size link.
 - Replaced the duplicated project-log content in the backlog with
   priorities and remaining tasks.
-
-The automated suite does not cover registration form processing.
-Registration therefore requires a fresh live check after deploying
-the password-validator correction.
+- Successfully deployed commit `d88e450` to Heroku.
+- Verified fresh registration, logout and login on the deployed site.
+- Verified an HTTP request returned 301 with its Location pointing
+  to the HTTPS URL.
+- Verified deployed car photo upload, price editing, comparison of two
+  and three cars, prevention of a fourth selection, and cancel and
+  confirmed deletion.
+- Verified in Chrome that both `sessionid` and `csrftoken` had Secure
+  checked.
+- Verified registration rejects duplicate usernames, mismatched
+  passwords and empty required fields, and invalid login attempts show
+  a generic error.
+- Verified account forms work with keyboard navigation and on mobile.
+- Verified negative car prices and invalid listing URLs are rejected
+  while preserving other entered details.
+- Verified non-image uploads and images larger than 5 MiB are rejected.
+- Visually checked all linked screenshots and confirmed they are readable.
+- Reviewed the seven GitHub stories and marked the implemented scope
+  complete.
+- Revalidated the updated rendered shortlist with Nu HTML Checker;
+  no errors or warnings were reported.
+- Automated tests still do not cover registration form processing.
 
 ## Remaining Verification
 
-- Deploy the latest settings corrections.
-- Verify HTTPS redirection, registration, login and core actions
-  on the final deployed version.
-- Revalidate the updated shortlist HTML.
-- Check documentation links, screenshot evidence and image credits.
-- Review database documentation and setup instructions.
-- Reconcile the project board with completed and deferred work.
+- Review image credits.
 - Complete final repository and submission checks.
+
+Database documentation and setup instructions were reviewed against
+the current configuration. A fresh installation was not tested.
 
 ## AI Use
 

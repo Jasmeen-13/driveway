@@ -25,12 +25,16 @@ User stories and acceptance criteria are tracked on the
 
 ## Remaining Submission Tasks
 
-- [ ] Deploy the latest password-validator, middleware and HTTPS settings fixes.
-- [ ] Verify registration, login, HTTPS redirection and core actions after deployment.
-- [ ] Revalidate the updated shortlist HTML and update its evidence.
-- [ ] Verify documentation links, screenshot files and image credits.
-- [ ] Review database documentation and setup instructions.
-- [ ] Update the project log and reconcile the GitHub board.
+- [x] Deploy the password-validator, middleware and HTTPS settings corrections.
+- [x] Verify fresh registration, logout, login and HTTP-to-HTTPS redirection.
+- [x] Revalidate the updated shortlist HTML; Nu HTML Checker reported no errors or warnings.
+- [x] Verify deployed car photo upload, price editing, two- and three-car comparison, fourth-selection prevention, and cancel/confirmed deletion.
+- [x] Verify in Chrome that `sessionid` and `csrftoken` both had Secure checked.
+- [x] Verify registration validation, generic invalid-login feedback, keyboard/mobile account forms, invalid car details, and invalid photo uploads.
+- [x] Verify documentation links and screenshot file targets; visually review all linked screenshots for readability.
+- [ ] Review image credits.
+- [x] Review database documentation and setup instructions against the configuration; a fresh installation was not tested.
+- [x] Review the seven GitHub stories and mark the implemented scope complete.
 - [ ] Complete the final repository and submission checks.
 
 ## Deferred Features
@@ -43,6 +47,7 @@ and user needs.
 | --- | --- |
 | Import specifications and photographs from a single listing URL | Reduce manual entry |
 | Multiple photographs per car | Show more detail about each vehicle |
+| Preview an uploaded photograph before saving | Let users confirm the selected image |
 | Smooth transitions between vehicles | Improve browsing and comparison |
 | Scrolling exterior-to-interior galleries | Present available listing photographs in a guided sequence |
 | Personal driveway photograph uploads | Let users visualise cars in their own space |

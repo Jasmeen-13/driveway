@@ -117,10 +117,16 @@ on a GitHub Projects board, using **Todo**, **In Progress** and **Done**.
 - [Prioritised backlog](docs/backlog.md)
 - [Development log](docs/project-log.md)
 
+![Final project board](docs/screenshots/agile-board-final.png)
+
 ## Testing
 
 Manual testing covered account actions, car management, comparison,
 ownership restrictions, responsive layouts and browser behaviour.
+
+Additional confirmed checks included account-form validation, keyboard
+and mobile use, car-form and photo-upload validation, and secure cookies
+on the deployed site. Linked screenshots were visually checked.
 
 The automated suite contains **14 passing Django tests**, covering:
 
@@ -283,6 +289,7 @@ availability of suitable exterior and interior photographs.
 
 - Support multiple photographs for each saved car.
 - Add sliding photograph views for browsing shortlisted vehicles.
+- Show an upload preview before saving a car.
 
 ### Vehicle Lookup
 
@@ -299,3 +306,14 @@ Their priorities and feasibility will be reviewed in the
 The automated suite covers selected application behaviours rather
 than every possible input or integration. It runs against SQLite;
 the deployed PostgreSQL and Cloudinary integrations were tested manually.
+
+### Known Limitations
+
+Deleting a car removes its database record, but its uploaded photo may remain in storage. Automatic orphaned-file cleanup is planned.
+
+### Car photographs
+
+Car photographs used in demonstration records and project screenshots
+were sourced from listings on [CarGurus](https://www.cargurus.co.uk/).
+Images belong to their respective owners. Driveway does not
+automatically import images from CarGurus.
