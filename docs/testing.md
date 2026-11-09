@@ -1,66 +1,202 @@
 # Testing
 
-## Manual tests 
+Driveway was tested locally and on the deployed Heroku application.
+Manual testing covered user journeys, permissions, responsive layouts
+and JavaScript behaviour. Automated tests checked selected views and
+form validation.
 
-Tests performed locally using Django's development server.
+## Manual Testing
+
+### Local Application
 
 | Test | Expected result | Result |
 | --- | --- | --- |
-| Register | Account created, user signed in, success message | Pass |
+| Register | Account created, user signed in and success message displayed | Pass |
+| Log in | Shortlist opens with username and success message | Pass |
 | Log out | Return home with logout message | Pass |
-| Log in | Open shortlist with username and success message | Pass |
-| Add car with photo | Saved details and photo displayed | Pass |
+| Add car with photo | Saved details and photograph displayed | Pass |
 | Edit price | Updated price and success message displayed | Pass |
 | Cancel deletion | Car remains saved | Pass |
 | Confirm deletion | Car removed and success message displayed | Pass |
 | Logged-out access to car details | Redirect to login | Pass |
 | Second account shortlist | First account's cars are absent | Pass |
 | Another user's detail, edit and delete URLs | Return 404 | Pass |
-| Compare two owned cars | Selected cars appear side by side | Pass |
-| Compare only one car | Show “Select two or three cars to compare.” | Pass |
-| Live homepage | Page and styling load | Pass |
-| Live registration | Account created and shortlist opens | Pass |
-| Live car creation with photo | Car details and photo display | Pass |
-| Persistence after Heroku restart | Saved car and photo remain available | Pass |
-| Live edit | Updated price is saved and displayed | Pass |
-| Live cancel deletion | Car remains saved | Pass |
-| Live confirm deletion | Car card disappears from shortlist | Pass |
-| Live compare two cars | Both cars and correct details appear | Pass |
-| Live compare three cars | All three cars appear | Pass |
-| Live compare one car | Selection validation message appears | Pass |
-| Live compare no cars | Selection validation message appears | Pass |
-| Live logged-out car access | Redirects to login | Pass |
-| Live other user's car details | Returns 404 | Pass |
-| Live account isolation | Other users' cars are absent from shortlist | Pass |
-| Live other user's edit page | Returns 404 | Pass |
-| Live other user's delete page | Returns 404 | Pass |
-| Mobile layout | Pages remain readable, controls usable and comparison cards stack without horizontal overflow | Pass |
+| Compare two owned cars | Selected cars and their details appear together | Pass |
+| Compare one car before JavaScript enhancement | Server displays “Select two or three cars to compare.” | Pass |
 
+### Deployed Application
 
-### Follow-up
+| Test | Expected result | Result |
+| --- | --- | --- |
+| Homepage | Page and styling load correctly | Pass |
+| Registration | Account created and shortlist opens | Pass |
+| Create car with photo | Car details and photograph display | Pass |
+| Persistence after Heroku restart | Saved car and photograph remain available | Pass |
+| Edit car | Updated price is saved and displayed | Pass |
+| Cancel deletion | Car remains saved | Pass |
+| Confirm deletion | Car card disappears from shortlist | Pass |
+| Compare two cars | Both cars and correct details appear | Pass |
+| Compare three cars | All three cars appear | Pass |
+| Compare one car | Selection validation message appears | Pass |
+| Compare no cars | Selection validation message appears | Pass |
+| Logged-out car access | Redirect to login | Pass |
+| Account isolation | Other users' cars are absent from shortlist | Pass |
+| Another user's detail URL | Return 404 | Pass |
+| Another user's edit URL | Return 404 | Pass |
+| Another user's delete URL | Return 404 | Pass |
 
-A car card initially appeared to remain after deletion. It later disappeared, but the cause was not established. Repeat this test during final regression testing.
+### JavaScript and Keyboard Interaction
 
-Direct unauthorised POST requests, automated tests and deployed-site testing are still pending.
+| Test | Expected result | Result |
+| --- | --- | --- |
+| Select and deselect cars | Selection counter updates | Pass |
+| Attempt to select a fourth car | Fourth selection is rejected with an explanatory message | Pass |
+| Submit zero or one selection | Submission is prevented and a helpful message appears | Pass |
+| Submit two or three selections | Comparison page opens | Pass |
+| Keyboard navigation | Tab reaches controls and Space toggles checkboxes | Pass |
+| Invalid keyboard submission | Validation message appears and receives focus | Pass |
+| JavaScript disabled | Two cars compare successfully; one selection triggers server-side validation | Pass |
 
-## Automated tests
+### Responsive and Browser Testing
 
-Created with GitHub Copilot assistance.
+| Test | Expected result | Result |
+| --- | --- | --- |
+| Mobile layouts | Pages remain readable and controls remain usable | Pass |
+| Mobile comparison | Car cards stack without horizontal overflow | Pass |
+| Chrome | Tested account, car-management and comparison journeys work | Pass |
+| Safari | Login, add, edit, delete, comparison, selection feedback and logout work | Pass |
 
-All 14 Django tests passed using an isolated in-memory SQLite database and local file storage. No system-check issues were reported.
+## Automated Testing
 
-Coverage includes car CRUD, ownership restrictions, logged-out redirects, comparison selections and form validation.
-Registration/login, image uploads and CSRF protection are notcovered by this automated suite.
+The tests in `cars/tests.py` were created with GitHub Copilot assistance
+and reviewed against the application's routes, models and forms.
 
-## HTML validation
+**All 14 tests passed**, with no Django system-check issues.
 
-The deployed homepage passed the Nu HTML Checker with no errors or warnings.
+| Area | Behaviour checked |
+| --- | --- |
+| Authentication requirements | Logged-out users are redirected to login |
+| Account isolation | Shortlists contain only the signed-in user's cars |
+| Car creation | The signed-in user is assigned as owner |
+| Owner access | Owners can view, edit and delete their cars |
+| Delete confirmation | GET requests do not delete cars |
+| Unauthorised GET requests | Another user's detail, edit and delete pages return 404 |
+| Unauthorised POST requests | Another user cannot edit or delete a car |
+| Valid comparison | Two or three owned cars are returned |
+| Invalid comparison | Zero, one, four, malformed or another user's selections are rejected |
+| Form validation | Negative price, negative mileage and years beyond next year are rejected |
 
-![Homepage HTML validation](screenshots/html-validation-home.png)
+Tests used an isolated in-memory SQLite database and local file storage,
+rather than the production PostgreSQL database or Cloudinary.
 
-## JavaScript validation
+![Automated test results](screenshots/automated-tests.png)
 
-compare.js passed JSHint with no warnings.
-The selection counter, three-car limit, minimum selection message and keyboard controls were tested locally and passed.
+### Running the Automated Tests
 
-![JavaScript validation](screenshots/javascript-validation.png)
+With dependencies installed and local environment settings configured,
+run this command from the project root:
+
+```bash
+./.venv/bin/python -c 'import os; os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings"); from django.conf import settings; settings.DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}; settings.STORAGES = {"default": {"BACKEND": "django.core.files.storage.FileSystemStorage"}, "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"}}; settings.SECURE_SSL_REDIRECT = False; import django; django.setup(); from django.core.management import call_command; call_command("test", "cars.tests", verbosity=2)'
+```
+
+HTTPS redirection is disabled only within this isolated test process.
+All 14 tests passed again after the password-validator and security
+configuration changes.
+
+### Test Limitations
+
+The automated suite does not test registration/login form processing,
+image uploads or CSRF enforcement. Authenticated view tests use
+`force_login`. Account journeys and photograph uploads were checked
+manually.
+
+## HTML Validation
+
+Rendered HTML was checked using the Nu HTML Checker. For pages requiring
+login, the rendered page source was submitted rather than the Django
+template code.
+
+| Page | Result | Evidence |
+| --- | --- | --- |
+| Homepage | No errors or warnings | [Homepage validation](screenshots/html-validation-home.png) |
+| Registration | Passed | [Registration validation](screenshots/html-validation-register.png) |
+| Login | Passed | [Login validation](screenshots/html-validation-login.png) |
+| Shortlist | Passed before the JavaScript template changes; recheck pending | [Shortlist validation](screenshots/html-validation-shortlist.png) |
+| Add car | Passed | [Add-car validation](screenshots/html-validation-add-car.png) |
+| Edit car | Passed | [Edit-car validation](screenshots/html-validation-edit-car.png) |
+| Car details | Passed | [Car-details validation](screenshots/html-validation-car-detail.png) |
+| Comparison | Passed | [Comparison validation](screenshots/html-validation-compare.png) |
+| Delete confirmation | Passed | [Delete-page validation](screenshots/html-validation-delete.png) |
+
+![Homepage HTML validation result](screenshots/html-validation-home.png)
+
+## CSS Validation
+
+The project's stylesheet passed the W3C CSS Validator.
+
+![CSS validation result](screenshots/css-validation.png)
+
+## Python Validation
+
+Python formatting was checked with:
+
+```bash
+./.venv/bin/python -m pycodestyle cars config manage.py --exclude=migrations
+```
+
+Missing final newlines, blank-line spacing and long lines were corrected.
+The subsequent check reported no issues. Django's system check and all
+14 automated tests also passed after the formatting changes.
+
+![Python validation result](screenshots/python-validation.png)
+
+## JavaScript Validation
+
+`static/js/compare.js` passed JSHint with no warnings using
+`esversion: 6` and `browser: true`.
+
+An initial warning about a line break before a conditional operator
+was resolved by rewriting the status-message assignment as an
+`if/else` statement.
+
+The selection counter, three-car limit, minimum-selection feedback
+and keyboard interaction were also tested manually.
+
+![JavaScript validation result](screenshots/javascript-validation.png)
+
+## Lighthouse
+
+PageSpeed Insights recorded these results for the deployed homepage:
+
+| Device | Performance | Accessibility | Best Practices | SEO |
+| --- | --- | --- | --- | --- |
+| Mobile | 98 | 100 | 100 | 100 |
+| Desktop | 100 | 100 | 100 | 100 |
+
+These results cover the homepage only. Automated accessibility scores
+complement manual testing; they do not establish that every page or
+interaction is fully accessible.
+
+### Mobile
+
+![Mobile Lighthouse results](screenshots/lighthouse-mobile.png)
+
+### Desktop
+
+![Desktop Lighthouse results](screenshots/lighthouse-desktop.png)
+
+## Issues and Follow-up
+
+| Issue | Action and outcome |
+| --- | --- |
+| A car card initially appeared to remain after deletion | The cause was not established. Subsequent deployed deletion tests passed. Automated tests also confirmed that POST deletion removes the record. |
+| Python formatting warnings | Corrected whitespace, final newlines and line wrapping; validation then passed. |
+| JSHint conditional-expression warning | Replaced the expression with an equivalent `if/else`; validation then passed. |
+
+### Final Checks Outstanding
+
+- Repeat HTML validation for the updated shortlist following the
+  addition of the selection status and script.
+- Confirm that all screenshot links in this document open the
+  correct evidence.

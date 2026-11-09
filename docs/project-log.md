@@ -1,61 +1,151 @@
 # Project Log
 
-## 4 November 2026 — Planning and Setup
+This log summarises development milestones, scope decisions and
+verification. Earlier plans are distinguished from the current
+implementation.
 
-### Completed
+## Planning and Setup
 
-- Reviewed the learning outcomes and pre-submission checklist.
-- Selected Driveway as the project concept.
-- Created the local project folder and Python virtual environment.
-- Selected the virtual environment in VS Code.
-- Installed Django 5.2.19 using Python 3.12.8.
-- Created the Django project with the configuration package `config`.
-- Recorded dependencies in requirements.txt.
-- Moved the secret key into the ignored local env.py file.
-- Configured DEBUG to read from the environment, defaulting to False.
-- Ran the Django system check successfully.
-- Initialised Git on the main branch.
-- Verified Git ignores env.py and the virtual environment.
+- Selected Driveway as a car-shortlisting application.
+- Reviewed the supplied project requirements and submission checklist.
+- Created the Python virtual environment and Django project.
+- Recorded dependencies in `requirements.txt`.
+- Configured the secret key and DEBUG setting through environment variables.
+- Excluded local environment files and the virtual environment from Git.
+- Connected the repository to GitHub.
+- Created a public project board for user stories and acceptance criteria.
+- Prepared desktop and mobile wireframes using Lucidchart AI,
+  then reviewed and adjusted the layouts.
 
-### Decisions
+### Initial Decisions
 
-- Users choose and add their own cars; there is no fixed catalogue.
-- Initial photographs retain their original backgrounds.
-- Manual image upload is always available.
-- Automatic photo import is requested for the initial release.
-  Supported sources still need investigation.
-- Personal driveway uploads and automatic car placement are future work.
-- Planned work time is 6–7 hours Wednesday, 9 hours Thursday,
-  9 hours Friday and some additional time Saturday.
+- Users add their own cars rather than choosing from a fixed catalogue.
+- Uploaded photographs retain their original backgrounds.
+- Manual entry and photograph uploads provide the core input method.
+- Automatic listing imports were considered for the initial release.
+- Personal driveway uploads and car-image placement were identified
+  as future development.
 
-### Next Steps
+## Car Model and Database
 
-- Make the initial commit and connect the GitHub repository.
-- Create a public project board with user stories and priorities.
-- Prepare wireframes and the database design.
-- Build the first working application features.
-- Deploy an early version to Heroku.
+- Created the `cars` application and custom `Car` model.
+- Linked each car to its owner through Django's user model.
+- Added specifications, listing URL, photograph, notes and timestamps.
+- Installed Pillow to support image validation.
+- Created and applied database migrations.
+- Added petrol plug-in hybrid as a fuel option through a further migration.
+- Confirmed Django's system checks passed.
 
-### 6 November 2026 — Car model
+## Homepage, Accounts and Car Management
 
-- Created the cars app and Car model, linked to Django's user model.
-- Added car details, an optional listing URL, photo and notes.
-- Installed Pillow for image uploads.
-- Applied database migrations successfully.
-- Ran Django's system check: no issues reported.
-- Frontend functionality is not yet implemented or tested.
+- Built the shared layout, homepage, account forms and shortlist.
+- Implemented registration, login and POST-based logout.
+- Added username display and feedback messages.
+- Implemented frontend car creation, detail, editing and deletion pages.
+- Added deletion confirmation.
+- Restricted car queries to the signed-in owner.
+- Manually tested account actions, car management and access restrictions.
 
-### 6 November 2026 — Homepage and authentication
+A car card initially appeared to remain after deletion. The cause was
+not established. Subsequent deployed deletion checks passed, and automated
+tests confirmed that deletion removes the database record.
 
-- Added car forms, views and URL routes.
-- Built the shared layout, homepage, account forms and shortlist page.
-- Manually verified registration, login, logout, redirects,
-  username display and success messages: all passed.
-- Car creation, editing and deletion still need templates and testing.
+## Car Comparison
 
-### Comparison feature started
+- Added the comparison view, route, template and selection controls.
+- Corrected an initial missing-view error during development.
+- Implemented comparison of two or three owned cars.
+- Added server-side checks for invalid selections and unavailable cars.
+- Verified valid comparisons and rejection of invalid selections.
 
-- Added the comparison view and URL route.
-- Fixed the view definition so the development server starts successfully.
-- Comparison template and selection controls are still pending.
-- Comparison functionality has not yet been tested.
+## Deployment and Persistent Storage
+
+- Configured Gunicorn, WhiteNoise and the Heroku deployment files.
+- Connected the Heroku application to the GitHub repository.
+- Configured PostgreSQL for production data.
+- Configured Cloudinary for uploaded photographs.
+- Stored production credentials in Heroku Config Vars.
+- Deployed the application and tested its main user journeys.
+- Confirmed that saved car details and photographs remained available
+  after a Heroku restart.
+
+## Scope Review
+
+Automatic listing imports were deferred to prioritise a reliable,
+tested release with accounts, private shortlists, car management
+and comparison.
+
+Photo sliders, driveway visualisation and registration-number lookup
+also remain future features. The README and backlog distinguish
+these plans from implemented functionality.
+
+## JavaScript Enhancement
+
+- Added an external comparison script loaded only on the shortlist page.
+- Added a live selection counter and feedback for invalid submissions.
+- Prevented selection of a fourth car.
+- Used a polite live region and focusable feedback.
+- Tested keyboard interaction.
+- Confirmed that comparison still works through Django validation
+  when JavaScript is disabled.
+- Resolved a JSHint warning and obtained a clean validation result.
+
+## Testing and Validation
+
+- Added 14 automated Django tests with GitHub Copilot assistance.
+- Reviewed tests covering car management, ownership restrictions,
+  comparison selections and selected form validation.
+- Ran the suite using in-memory SQLite and local file storage;
+  all 14 tests passed.
+- Performed HTML, CSS, Python and JavaScript validation.
+- Corrected Python formatting issues and reran checks.
+- Tested responsive layouts and user journeys in Chrome and Safari.
+- Recorded homepage Lighthouse results:
+  mobile 98/100/100/100 and desktop 100/100/100/100.
+- Documented results, limitations and evidence in
+  [testing.md](testing.md).
+
+## Final Audit and Corrections
+
+- Used Copilot to inspect application code, configuration and documentation.
+- Identified an incorrect password-validator configuration introduced
+  during line wrapping: trailing commas made validator names tuples.
+- Corrected the configuration and verified that all four validators load.
+- Moved SecurityMiddleware before WhiteNoise.
+- Added production HTTPS redirection, proxy recognition and secure cookies.
+- Reran Django's system check successfully.
+- Reran all 14 automated tests successfully after the settings changes.
+- Updated the documented test command to disable HTTPS redirection
+  only within the isolated test process.
+- Updated the README to reflect implemented features and future plans.
+- Added the wireframe image and full-size link.
+- Replaced the duplicated project-log content in the backlog with
+  priorities and remaining tasks.
+
+The automated suite does not cover registration form processing.
+Registration therefore requires a fresh live check after deploying
+the password-validator correction.
+
+## Remaining Verification
+
+- Deploy the latest settings corrections.
+- Verify HTTPS redirection, registration, login and core actions
+  on the final deployed version.
+- Revalidate the updated shortlist HTML.
+- Check documentation links, screenshot evidence and image credits.
+- Review database documentation and setup instructions.
+- Reconcile the project board with completed and deferred work.
+- Complete final repository and submission checks.
+
+## AI Use
+
+- ChatGPT supported planning, implementation guidance, debugging,
+  testing explanations and documentation.
+- Lucidchart AI supported the initial wireframe layouts.
+- GitHub Copilot assisted with automated tests, comparison JavaScript,
+  formatting changes and the repository audit.
+
+Generated changes were reviewed and checked through targeted commands,
+automated tests and manual testing. The password-validator issue found
+during final review demonstrated why passing style checks and a limited
+test suite do not replace testing all affected user journeys.

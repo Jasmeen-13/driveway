@@ -1,37 +1,65 @@
-# Project Log
+# Product Backlog
 
-## 4 November 2026 — Planning and Setup
+Driveway's release priorities use MoSCoW:
+**Must Have**, **Should Have**, **Could Have** and
+**Won't Have in this release**.
 
-### Completed
+User stories and acceptance criteria are tracked on the
+[GitHub project board](https://github.com/users/Jasmeen-13/projects/1).
 
-- Reviewed the learning outcomes and pre-submission checklist.
-- Selected Driveway as the project concept.
-- Created the local project folder and Python virtual environment.
-- Selected the virtual environment in VS Code.
-- Installed Django 5.2.19 using Python 3.12.8.
-- Created the Django project with the configuration package `config`.
-- Recorded dependencies in requirements.txt.
-- Moved the secret key into the ignored local env.py file.
-- Configured DEBUG to read from the environment, defaulting to False.
-- Ran the Django system check successfully.
-- Initialised Git on the main branch.
-- Verified Git ignores env.py and the virtual environment.
+## Implemented Features
 
-### Decisions
+| Priority | Feature | Status |
+| --- | --- | --- |
+| Must Have | User registration, login and logout | Implemented and tested |
+| Must Have | Private shortlists with owner-restricted access | Implemented and tested |
+| Must Have | Frontend create, read, update and delete functionality | Implemented and tested |
+| Must Have | Deletion confirmation | Implemented and tested |
+| Must Have | Server-side validation and feedback messages | Implemented and tested |
+| Must Have | Heroku deployment with persistent database storage | Deployed and tested |
+| Should Have | Manual photograph uploads with persistent storage | Implemented and tested |
+| Should Have | Comparison of two or three owned cars | Implemented and tested |
+| Should Have | Listing links and personal notes | Implemented |
+| Should Have | Responsive layouts and keyboard-accessible controls | Implemented and manually tested |
+| Should Have | JavaScript selection counter and comparison feedback | Implemented and tested |
 
-- Users choose and add their own cars; there is no fixed catalogue.
-- Initial photographs retain their original backgrounds.
-- Manual image upload is always available.
-- Automatic photo import is requested for the initial release.
-  Supported sources still need investigation.
-- Personal driveway uploads and automatic car placement are future work.
-- Planned work time is 6–7 hours Wednesday, 9 hours Thursday,
-  9 hours Friday and some additional time Saturday.
+## Remaining Submission Tasks
 
-### Next Steps
+- [ ] Deploy the latest password-validator, middleware and HTTPS settings fixes.
+- [ ] Verify registration, login, HTTPS redirection and core actions after deployment.
+- [ ] Revalidate the updated shortlist HTML and update its evidence.
+- [ ] Verify documentation links, screenshot files and image credits.
+- [ ] Review database documentation and setup instructions.
+- [ ] Update the project log and reconcile the GitHub board.
+- [ ] Complete the final repository and submission checks.
 
-- Make the initial commit and connect the GitHub repository.
-- Create a public project board with user stories and priorities.
-- Prepare wireframes and the database design.
-- Build the first working application features.
-- Deploy an early version to Heroku.
+## Deferred Features
+
+The following items are **Won't Have in this release**.
+Their priority for a future release will depend on feasibility
+and user needs.
+
+| Feature | Intended benefit |
+| --- | --- |
+| Import specifications and photographs from a single listing URL | Reduce manual entry |
+| Multiple photographs per car | Show more detail about each vehicle |
+| Smooth transitions between vehicles | Improve browsing and comparison |
+| Scrolling exterior-to-interior galleries | Present available listing photographs in a guided sequence |
+| Personal driveway photograph uploads | Let users visualise cars in their own space |
+| Drag and resize a car image on the driveway | Give users control over image placement |
+| Background removal and automatic placement | Improve driveway visualisation |
+| Registration-number lookup | Populate supported vehicle specifications |
+
+Automatic imports and vehicle lookup require investigation of suitable
+data providers, permitted access and available information.
+Manual entry and uploads would remain available as fallbacks.
+
+## Scope Decision
+
+Automatic photo import was considered during initial planning but
+deferred to prioritise reliable car management, permissions, comparison,
+deployment and testing. The current application uses manually entered
+details and uploaded photographs.
+
+The original visualisation concept remains a future direction rather
+than an implemented feature.
